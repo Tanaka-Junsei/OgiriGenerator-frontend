@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 
-// 環境変数の確認
-console.log('VITE_FIREBASE_API_KEY_login:', import.meta.env.VITE_FIREBASE_API_KEY);
-
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -14,8 +11,6 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
-
-console.log('Firebase Config:', firebaseConfig); // ここで環境変数を確認
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
