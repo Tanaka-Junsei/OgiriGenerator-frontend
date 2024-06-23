@@ -3,6 +3,8 @@ import { useState } from 'react';
 import Header from './component/header';
 import Content from './component/content';
 import Modal from './component/modal';
+import LoginButton from './component/loginButton';
+import LoginModal from './component/loginModal';
 
 interface State {
   answer: string;
@@ -13,9 +15,10 @@ interface State {
   answerButtonText: string;
   isModalOpen: boolean;
   isGenerateButtonDisabled: boolean;
+  isLoginModalOpen: boolean;
 }
 
-function App() {
+const App: React.FC = () => {
   const [state, setState] = useState<State>({
     answer: '',
     topic: '',
@@ -25,6 +28,7 @@ function App() {
     answerButtonText: '回答する',
     isModalOpen: false,
     isGenerateButtonDisabled: false,
+    isLoginModalOpen: false,
   });
 
   const generateTopic = () => {
@@ -64,9 +68,14 @@ function App() {
     setState(prevState => ({ ...prevState, isModalOpen: !state.isModalOpen }));
   };
 
+  const toggleLoginModal = () => {
+    setState(prevState => ({ ...prevState, isLoginModalOpen: !state.isLoginModalOpen }));
+  };
+
   return (
     <div className="container">
       <Header toggleModal={toggleModal} />
+      <LoginButton onClick={toggleLoginModal} />
       <Content
         state={state}
         getAnswer={getAnswer}
@@ -74,6 +83,7 @@ function App() {
         handleInputChange={handleInputChange}
       />
       <Modal isModalOpen={state.isModalOpen} toggleModal={toggleModal} />
+      <LoginModal isModalOpen={state.isLoginModalOpen} toggleModal={toggleLoginModal} />
     </div>
   );
 }
